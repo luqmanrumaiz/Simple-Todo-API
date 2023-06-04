@@ -8,4 +8,20 @@ public class TodoTask
     public DateTime DueDate { get; set; }
     public bool IsCompleted { get; set; }
     public Enums.TaskPriority Priority { get; set; }
+
+    private TodoTask(
+        Guid id,
+        string title,
+        DateTime dueDate,
+        bool isCompleted,
+        Enums.TaskPriority priority,
+        string? description = null)
+    {
+        Id = id;
+        Title = title;
+        Description = description;
+        DueDate = dueDate;
+        IsCompleted = isCompleted;
+        Priority = priority;
+    }
 }
