@@ -61,4 +61,14 @@ public class TodoTask
             priority,
             description ?? "");
     }
+
+    public static ErrorOr<TodoTask> From(CreateTaskRequest request)
+    {
+        return Create(
+            request.Title,
+            request.DueDate,
+            request.IsCompleted,
+            Enum.Parse<TaskPriority>(request.Priority),
+            request.Description);
+    }
 }
