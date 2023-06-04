@@ -2,6 +2,9 @@ namespace Backend.Models;
 
 public class TodoTask
 {
+    public const int MinTitleLength = 3;
+    public const int MaxTitleLength = 50;
+
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string? Description { get; set; }
