@@ -1,6 +1,10 @@
+using Backend.Services;
+using Backend.Services.Task;
+
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddControllers();
+    builder.Services.AddScoped<ITodoTaskService, TodoTaskService>();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 }
