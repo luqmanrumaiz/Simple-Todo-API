@@ -14,4 +14,17 @@ public class TodoTaskController : ApiController
     {
         _taskService = taskService;
     }
+
+
+    // Helper method to map the Task model for the response
+    private static TaskResponse MapTaskResponse(TodoTask task)
+    {
+        return new TaskResponse(
+            task.Id,
+            task.Title,
+            task.Description,
+            task.DueDate,
+            task.IsCompleted,
+            (int) task.Priority);
+    }
 }
