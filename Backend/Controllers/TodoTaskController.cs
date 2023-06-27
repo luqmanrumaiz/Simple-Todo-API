@@ -55,6 +55,29 @@ public class TodoTaskController : ApiController
             errors => Problem(errors));
     }
 
+    [HttpPut("{id:guid}")]
+    public IActionResult UpdateTask(Guid id, UpdateTaskRequest request)
+    {
+        // Converting the request into a TodoTask using the From method
+        ErrorOr<TodoTask> requestToTaskResult = TodoTask.From(id, request);
+
+        // Checking if there are any errors in the conversion
+        if (requestToTaskResult.IsError)
+        {
+            // Returning a problem response with the errors
+            return Problem(requestToTaskResult.Errors);
+        }
+
+        // Extracting the TodoTask object from the converted request
+        var task = requestToTaskResult.Value;
+
+        ErrorOr<Updated> addTaskResult = _taskService.UpdateTask(id, task);
+
+        return addTaskResult.Match(
+            created => NoContent(),
+            errors => Problem(errors));
+    }
+
     // Helper method to map the Task model for the response
     private static TaskResponse MapTaskResponse(TodoTask task)
     {

@@ -7,5 +7,6 @@ namespace Backend.Services;
     {
         ErrorOr<Created> AddTask(TodoTask todoTask);
         ErrorOr<TodoTask> GetTask(Guid id);
-    }
+        ErrorOr<Updated> UpdateTask(Guid id, TodoTask updatedTask);
+}
 

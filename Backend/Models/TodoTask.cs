@@ -71,4 +71,14 @@ public class TodoTask
             Enum.Parse<TaskPriority>(request.Priority),
             request.Description);
     }
+    public static ErrorOr<TodoTask> From(Guid id, UpdateTaskRequest request)
+    {
+        return Create(
+            request.Title,
+            request.DueDate,
+            request.IsCompleted,
+            Enum.Parse<TaskPriority>(request.Priority),
+            request.Description,
+            id);
+    }
 }

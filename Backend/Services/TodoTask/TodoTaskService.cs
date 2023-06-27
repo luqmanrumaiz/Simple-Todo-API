@@ -24,4 +24,14 @@ public class TodoTaskService : ITodoTaskService
 
         return Errors.TodoTask.NotFound;
     }
+    public ErrorOr<Updated> UpdateTask(Guid id, TodoTask updatedTask)
+    {
+        if (_todoTasks.Any(x => x.Key == id))
+        {
+            _todoTasks[id] = updatedTask;
+            return Result.Updated;
+        }
+
+        return Errors.TodoTask.NotFound;
+    }
 }
