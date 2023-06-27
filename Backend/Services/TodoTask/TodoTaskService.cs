@@ -34,4 +34,15 @@ public class TodoTaskService : ITodoTaskService
 
         return Errors.TodoTask.NotFound;
     }
+
+    public ErrorOr<Deleted> DeleteTask(Guid id)
+    {
+        if (_todoTasks.Any(x => x.Key == id))
+        {
+            _todoTasks.Remove(id);
+            return Result.Deleted;
+        }
+
+        return Errors.TodoTask.NotFound;
+    }
 }

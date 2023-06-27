@@ -55,6 +55,7 @@ public class TodoTaskController : ApiController
             errors => Problem(errors));
     }
 
+    // HTTP PUT action to update task by ID
     [HttpPut("{id:guid}")]
     public IActionResult UpdateTask(Guid id, UpdateTaskRequest request)
     {
@@ -71,10 +72,21 @@ public class TodoTaskController : ApiController
         // Extracting the TodoTask object from the converted request
         var task = requestToTaskResult.Value;
 
-        ErrorOr<Updated> addTaskResult = _taskService.UpdateTask(id, task);
+        ErrorOr<Updated> updateTaskResult = _taskService.UpdateTask(id, task);
 
-        return addTaskResult.Match(
+        return updateTaskResult.Match(
             created => NoContent(),
+            errors => Problem(errors));
+    }
+
+    // HTTP GET action to get a task by ID
+    [HttpDelete("{id:guid}")]
+    public IActionResult DeleteTask(Guid id)
+    {
+        ErrorOr<Deleted> deleteTaskResult = _taskService.DeleteTask(id);
+
+        return deleteTaskResult.Match(
+            task => NoContent(),
             errors => Problem(errors));
     }
 
