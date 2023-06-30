@@ -2,6 +2,7 @@ using Backend.Contracts.TodoTask;
 using Backend.Enums;
 using Backend.ServiceErrors;
 using ErrorOr;
+using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Models;
 
@@ -9,8 +10,11 @@ public class TodoTask
 {
     public const int MinTitleLength = 3;
     public const int MaxTitleLength = 50;
-
+    
+    [Key]
     public Guid Id { get; set; }
+
+    [Required(ErrorMessage = "Title required to create a task !!!")]
     public string Title { get; set; }
     public string? Description { get; set; }
     public DateTime DueDate { get; set; }
